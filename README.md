@@ -39,13 +39,13 @@ src/
          └─ db/changelog/db.changelog-master.yaml
 
 
-Register
+1.Register
 POST /api/auth/register
 Content-Type: application/json
 
 { "login":"user1", "password":"pass", "name":"Ivan" }
 
-Login (get JWT)
+2.Login (get JWT)
 POST /api/auth/login
 Content-Type: application/json
 
@@ -54,7 +54,7 @@ Content-Type: application/json
 Response:
 { "token": "<JWT>" }
 
-Generate chat token
+3.Generate chat token
 POST /api/auth/token
 Authorization: Bearer <JWT>
 
