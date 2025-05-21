@@ -30,13 +30,48 @@ src/
      │   │   └─ TelegramBotRegistration.java
      │   ├─ entity/           # JPA-сущности: User, TelegramChat, Message
      │   ├─ repo/             # Spring Data репозитории
-     │   ├─ security/         # JwtProvider, JwtFilter, CustomUserDetailsService
-     │   ├─ auth/             # AuthService, AuthController
+     │   ├─ auth/             # JwtProvider, JwtFilter, CustomUserDetailsService, AuthService
      │   ├─ service/          # MessageService, TelegramBotService
      │   ├─ dto/              # DTO для запросов/ответов
-     │   └─ controller/       # MessageController
+     │   └─ controller/       # AuthController, MessageController
      └─ resources/
          ├─ application.properties
          └─ db/changelog/db.changelog-master.yaml
+
+
+Register
+POST /api/auth/register
+Content-Type: application/json
+
+{ "login":"user1", "password":"pass", "name":"Ivan" }
+
+Login (get JWT)
+POST /api/auth/login
+Content-Type: application/json
+
+{ "login":"user1", "password":"pass" }
+
+Response:
+{ "token": "<JWT>" }
+
+Generate chat token
+POST /api/auth/token
+Authorization: Bearer <JWT>
+
+4. Bind Telegram Chat
+    Open bot in Telegram (@<BOT_USERNAME>) and press Start.
+    Send the generated chatToken to the bot.
+
+5. Send Message
+POST /api/messages
+Authorization: Bearer <JWT>
+Content-Type: application/json
+
+{ "body":"Hello, bot!" }
+
+6.GET /api/messages
+Authorization: Bearer <JWT>
+
+
 
 
